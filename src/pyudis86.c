@@ -12,7 +12,7 @@
  *       notice, this list of conditions and the following disclaimer in the
  *       documentation and/or other materials provided with the distribution.
  *     * Neither the name of the author nor the names of any co-contributors
- *       may be used to endorse or promote products derived from this software 
+ *       may be used to endorse or promote products derived from this software
  *       without specific prior written permission.
  *
  * THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
@@ -61,7 +61,7 @@ py_udis86_new(PyObject *self, PyObject *args) {
 	py_udis86 *ud = NULL;
 
 	ud = PyObject_New(py_udis86, &py_udis86_t);
-	
+
 	udobject = malloc(sizeof(ud_t));
 	ud->udobject = udobject;
 
@@ -185,7 +185,7 @@ py_udis86_set_syntax(PyObject *self, PyObject *args) {
 		PyErr_SetString(PyExc_TypeError, "unknown syntax");
 		return NULL;
 	}
-	
+
 	return Py_BuildValue("i", syntax);
 }
 
@@ -209,7 +209,7 @@ static PyMethodDef udis86_methods[] = {
 	{"insn_len", py_udis86_insn_len, METH_NOARGS, ""},
 	{"insn_off", py_udis86_insn_off, METH_NOARGS, ""},
 	{"insn_ptr", py_udis86_insn_ptr, METH_NOARGS, ""},
-	{"set_input_bufer", py_udis86_set_input_buffer, METH_VARARGS, ""},
+	{"set_input_buffer", py_udis86_set_input_buffer, METH_VARARGS, ""},
 	{"set_input_file", py_udis86_set_input_file, METH_VARARGS, ""},
 	{"set_mode", py_udis86_set_mode, METH_VARARGS, ""},
 	{"set_pc", py_udis86_set_pc, METH_VARARGS, ""},
