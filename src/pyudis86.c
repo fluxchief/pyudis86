@@ -77,11 +77,7 @@ py_udis86_dealloc(PyObject *self, PyObject *args) {
 
 static PyObject *
 py_udis86_disassemble(PyObject *self, PyObject *args) {
-	int rc;
-
-	rc=ud_disassemble(UDIS86_OBJ(self));
-
-	return Py_BuildValue("i", rc);
+	return Py_BuildValue("I", ud_disassemble(UDIS86_OBJ(self)));
 }
 
 static PyObject *
@@ -101,11 +97,12 @@ py_udis86_insn_off(PyObject *self, PyObject *args) {
 
 static PyObject *
 py_udis86_insn_len(PyObject *self, PyObject *args) {
-	return Py_BuildValue("i", ud_insn_len(UDIS86_OBJ(self)));
+	return Py_BuildValue("I", ud_insn_len(UDIS86_OBJ(self)));
 }
 
 static PyObject *
 py_udis86_insn_ptr(PyObject *self, PyObject *args) {
+    /* XXX TODO ud_insn_ptr returns a uint8_t* so this can't be right */
 	return Py_BuildValue("i", ud_insn_ptr(UDIS86_OBJ(self)));
 }
 
