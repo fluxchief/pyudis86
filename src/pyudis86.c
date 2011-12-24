@@ -156,14 +156,14 @@ py_udis86_set_mode(PyObject *self, PyObject *args) {
 
 static PyObject *
 py_udis86_set_pc(PyObject *self, PyObject *args) {
-	int origin;
+	uint64_t origin;
 
-	if (!PyArg_ParseTuple(args, "i", &origin) || origin < 0) {
+	if (!PyArg_ParseTuple(args, "K", &origin) || origin < 0) {
 		PyErr_SetString(PyExc_TypeError, "invalid origin argument");
 		return NULL;
 	}
 
-	ud_set_pc(UDIS86_OBJ(self), (uint64_t)origin);
+	ud_set_pc(UDIS86_OBJ(self), origin);
 
 	return Py_BuildValue("i", origin);
 }
