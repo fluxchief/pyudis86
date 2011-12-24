@@ -12,7 +12,7 @@
 #       notice, this list of conditions and the following disclaimer in the
 #       documentation and/or other materials provided with the distribution.
 #     * Neither the name of the author nor the names of any co-contributors
-#       may be used to endorse or promote products derived from this software 
+#       may be used to endorse or promote products derived from this software
 #       without specific prior written permission.
 #
 # THIS SOFTWARE IS PROVIDED BY THE AUTHOR ``AS IS'' AND ANY EXPRESS OR
@@ -52,9 +52,15 @@ udis86_dep = glob.glob('src/*.h')
 udis86_lib = ['udis86']
 udis86_libdir = ['/usr/local/lib/']
 udis86_incdir = ['/usr/local/include/', '/usr/local/include/libudis86']
+
 if 'bsd' in sys.platform[-1] or 'bsd' in os.uname()[0].lower():
-    udis86_incdir = ['/usr/include/', '/usr/include/libudis86']
-    udis86_libdir = ['/usr/local/lib/']
+    udis86_incdir.extend(['/usr/include/', '/usr/include/libudis86'])
+
+if 'darwin' in sys.platform[-1] or 'darwin' in os.uname()[0].lower():
+    udis86_libdir.extend(['/opt/local/lib/'])
+    udis86_incdir.extend(['/opt/local/include/',
+                          '/opt/local/include/libudis86/'])
+
 udis86_compile_args = ['-ggdb']
 
 udis86 = Extension(

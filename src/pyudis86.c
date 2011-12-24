@@ -123,10 +123,10 @@ py_udis86_set_input_buffer(PyObject *self, PyObject *args) {
 
 static PyObject *
 py_udis86_set_input_file(PyObject *self, PyObject *args) {
+    /* XXX no need to wrap it for now it provoke a random SEGV */
+    /*
 	PyObject *file;
-
-	/* XXX no need to wrap it for now it provoke a random SEGV ...
-	 * if (!PyArg_ParseTuple(args, "O", &file)) {
+    if (!PyArg_ParseTuple(args, "O", &file)) {
 		PyErr_SetString(PyExc_TypeError, "invalid file argument");
 		return NULL;
 	}
