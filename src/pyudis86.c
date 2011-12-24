@@ -96,7 +96,7 @@ py_udis86_insn_hex(PyObject *self, PyObject *args) {
 
 static PyObject *
 py_udis86_insn_off(PyObject *self, PyObject *args) {
-	return Py_BuildValue("l", ud_insn_off(UDIS86_OBJ(self)));
+	return Py_BuildValue("K", ud_insn_off(UDIS86_OBJ(self)));
 }
 
 static PyObject *
