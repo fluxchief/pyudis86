@@ -53,5 +53,6 @@ static PyObject * py_udis86_set_syntax(PyObject *self, PyObject *args);
 static PyObject * py_udis86_set_vendor(PyObject *self, PyObject *args);
 static PyObject * py_udis86_insn_asm(PyObject *self, PyObject *args);
 static PyObject * py_udis86_getattr(PyObject *self, char *name);
-
+static PyObject * py_udis86_input_skip(PyObject *self, PyObject *args);
+static PyObject * py_udis86_get_operand(PyObject *self, PyObject *args);
 #endif /* _PY_UDIS86_H_ */

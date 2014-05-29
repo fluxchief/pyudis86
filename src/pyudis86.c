@@ -165,6 +165,19 @@ py_udis86_set_pc(PyObject *self, PyObject *args) {
 	return Py_BuildValue("i", origin);
 }
 
+static PyObject * py_udis86_input_skip(PyObject *self, PyObject *args){
+    int origin;
+
+    if (!PyArg_ParseTuple(args, "i", &origin) || origin < 0) {
+        PyErr_SetString(PyExc_TypeError, "invalid origin argument");
+        return NULL;
+    }
+
+    ud_input_skip(UDIS86_OBJ(self), (uint64_t)origin);
+
+    return Py_BuildValue("i", origin);
+}
+
 static PyObject *
 py_udis86_set_syntax(PyObject *self, PyObject *args) {
 	int syntax = UD_MODULE_SYN_ATT;
@@ -199,6 +212,31 @@ py_udis86_set_vendor(PyObject *self, PyObject *args) {
 	return Py_BuildValue("i", vendor);
 }
 
+static PyObject *
+py_udis86_get_operand(PyObject *self, PyObject *args) {
+    int argument_no = 0;
+    const ud_operand_t* operand = NULL;
+
+    if (!PyArg_ParseTuple(args, "i", &argument_no) || argument_no < 0) {
+        PyErr_SetString(PyExc_TypeError, "invalid argument number");
+        return NULL;
+    }
+
+    operand = ud_insn_opr(PY_UDIS86(self)->udobject, argument_no);
+    if(!operand)
+        return Py_BuildValue("[iiiiiii]", 0, 0, 0, 0, 0, 0, 0);
+
+    return Py_BuildValue("[iiiiiil]",
+        operand -> size, operand -> type,
+        operand -> base,
+        operand -> index,
+        operand -> scale,
+        operand -> offset,
+        operand -> lval
+    );
+}
+
+
 static PyMethodDef udis86_methods[] = {
 	{"disassemble", py_udis86_disassemble, METH_NOARGS, ""},
 	{"insn_asm", py_udis86_insn_asm, METH_NOARGS, ""},
@@ -212,6 +250,8 @@ static PyMethodDef udis86_methods[] = {
 	{"set_pc", py_udis86_set_pc, METH_VARARGS, ""},
 	{"set_syntax", py_udis86_set_syntax, METH_VARARGS, ""},
 	{"set_vendor", py_udis86_set_vendor, METH_VARARGS, ""},
+    {"input_skip", py_udis86_input_skip, METH_VARARGS, ""},
+    {"get_operand", py_udis86_get_operand, METH_VARARGS, ""},
 	{ NULL, 0, 0, NULL }
 };
 

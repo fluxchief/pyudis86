@@ -56,6 +56,14 @@ initudis86(void) {
 	PY_CONST(UD_VENDOR_INTEL, UD_VENDOR_INTEL);
 	PY_CONST(UD_VENDOR_AMD, UD_VENDOR_AMD);
 
+	// Instruction constants
+	PY_CONST(UD_OP_MEM, UD_OP_MEM);
+	PY_CONST(UD_OP_PTR, UD_OP_PTR);
+	PY_CONST(UD_OP_IMM, UD_OP_IMM);
+	PY_CONST(UD_OP_JIMM, UD_OP_JIMM);
+	PY_CONST(UD_OP_CONST, UD_OP_CONST);
+	PY_CONST(UD_OP_REG, UD_OP_REG);
+
 	if (PyErr_Occurred())
 		PyErr_SetString(PyExc_ImportError, "udis86: init failed");
 }
